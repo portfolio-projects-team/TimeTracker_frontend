@@ -20,10 +20,12 @@ export const signUp = () => (
           <Text>Box 3</Text>
         </Center>
       </Box>
-      <Box flex="1" width="50vh" bg="#F0F0F0" padding={20}>
+      <Box flex="1" width="50vw" bg="#F0F0F0" padding={20}>
+        <Center>
         <Text fontSize="4xl" fontWeight="bold">
           Create an account
         </Text>
+        </Center>
         <Center>
           <FormControl marginTop={30} width="30vw">
             <FormLabel>First Name</FormLabel>
