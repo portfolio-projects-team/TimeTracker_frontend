@@ -1,6 +1,6 @@
 import { Center, ChakraProvider, Container, Heading } from "@chakra-ui/react";
 import { apptheme } from "./theme";
-import Login from './Login';
+
 
 
 function App() {
