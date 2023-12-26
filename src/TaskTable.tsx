@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import { Input, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
+import './TaskTable.css'; // Import the CSS file
 
 interface Task {
     id: number;
@@ -21,11 +23,11 @@ const TaskTable: React.FC<TaskTableProps> = ({ data }) => {
         <>
             <Input
                 type="text"
-                placeholder="Search Task Name"
+                placeholder="Search Task ID"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Table variant="simple" mt={4}>
+            <Table className="task-table" variant="simple" mt={4}>
                 <Thead>
                     <Tr>
                         <Th>Task ID</Th>
