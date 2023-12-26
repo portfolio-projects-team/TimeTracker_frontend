@@ -1,18 +1,18 @@
-import { Center, ChakraProvider, Container, Heading } from "@chakra-ui/react";
+import { Center, ChakraProvider, Container} from "@chakra-ui/react";
 import { apptheme } from "./theme";
 import TaskTable from "./TaskTable";
+import { signUp } from "./components/SignUp/signUp";
+
 
 function App() {
   return (
-    <>
-      <ChakraProvider theme={apptheme}>
-        <Container>
-          <Center h="100vh">
-            <Heading>App coming soon!</Heading>
-          </Center>
-        </Container>
-      </ChakraProvider>
-    </>
+    <ChakraProvider theme={apptheme}>
+      <Container>
+        <Center>
+          {signUp()}
+        </Center>
+      </Container>
+    </ChakraProvider>
   );
 }
 
