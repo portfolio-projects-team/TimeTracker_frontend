@@ -1,5 +1,6 @@
 import { Center, ChakraProvider, Container, Heading } from "@chakra-ui/react";
 import { apptheme } from "./theme";
+import TaskTable from "./TaskTable";
 
 function App() {
   return (
