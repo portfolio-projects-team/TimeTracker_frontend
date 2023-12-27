@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -10,20 +11,39 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 
 const poolData = {
-  UserPoolId: 'eu-west-2_cLq8JoGcL', // Your user pool id here
-  ClientId: 'dcul67egcvg5l4g7epd7lbos5', // Your client id here
+  UserPoolId: 'eu-west-2_cLq8JoGcL',
+  ClientId: 'dcul67egcvg5l4g7epd7lbos5',
 };
 
-export const signUp = () => {
-  /// https://www.npmjs.com/package/amazon-cognito-identity-js
-  const onSubmit = (username: string, password: string) => {
-    const userPool = new CognitoUserPool(poolData);
-    userPool.signUp(username, password, [], [], (err, result) => {
-      console.log(err);
-      console.log(result);
+const userPool = new CognitoUserPool(poolData);
+
+const SignUp = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const attributeList = [
+      new CognitoUserAttribute({ Name: 'email', Value: email }),
+      new CognitoUserAttribute({ Name: 'given_name', Value: firstName }),
+      new CognitoUserAttribute({ Name: 'family_name', Value: lastName }),
+    ];
+
+    userPool.signUp(email, password, attributeList, [], (err, result) => {
+      if (err) {
+        console.error('Signup error:', err);
+        // Handle signup error
+      } else {
+        const cognitoUser = result?.user;
+        console.log('User signed up:', cognitoUser);
+        // Handle successful signup
+      }
     });
   };
 
@@ -35,28 +55,50 @@ export const signUp = () => {
             <Text>Box 3</Text>
           </Center>
         </Box>
-        <Box flex="1" width="50vw" bg="#F0F0F0" padding={20}>
+        <Box flex="1" width="50vh" bg="#F0F0F0" padding={20}>
+          <Text fontSize="4xl" fontWeight="bold">
+            Create an account
+          </Text>
           <Center>
-            <Text fontSize="4xl" fontWeight="bold">
-              Create an account
-            </Text>
-          </Center>
-          <Center>
-            <FormControl marginTop={30} width="30vw">
+            <FormControl onSubmit={handleSubmit} marginTop={30} width="30vw">
               <FormLabel>First Name</FormLabel>
-              <Input type="text" placeholder="First Name" />
+              <Input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
               <FormLabel>Last Name</FormLabel>
-              <Input type="text" placeholder="Last Name" />
+              <Input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
               <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="Email" />
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <FormLabel>Password</FormLabel>
-              <Input type="password" placeholder="Password" />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button
+                type="submit"
+                marginTop={5}
+                bg="#6F2DA8"
+                colorScheme="white"
+                width="30vw"
+              >
+                Create Account
+              </Button>
             </FormControl>
-          </Center>
-          <Center>
-            <Button marginTop={5} bg="#6F2DA8" colorScheme="white" width="30vw">
-              Create Account
-            </Button>
           </Center>
           <Center>
             <Button
@@ -87,3 +129,6 @@ export const signUp = () => {
     </Container>
   );
 };
+
+export default SignUp;
+

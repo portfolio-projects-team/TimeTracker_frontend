@@ -1,13 +1,13 @@
 import { Center, ChakraProvider, Container} from "@chakra-ui/react";
 import { apptheme } from "./theme";
-import { signUp } from "./components/SignUp/signUp";
+import SignUp from "./components/SignUp/signUp";
 
 function App() {
   return (
     <ChakraProvider theme={apptheme}>
       <Container>
         <Center>
-          {signUp()}
+          <SignUp />
         </Center>
       </Container>
     </ChakraProvider>
