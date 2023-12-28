@@ -19,9 +19,20 @@ export const SignUp = () => {
   const [firstName, setFirstName] = useState(''); 
   const [lastName, setLastName] = useState(''); 
 
+
   const handleSignUp = async () => {
     try {
-      await signUpUser({ Email: email, Password: password, FirstName: firstName, LastName: lastName });
+      await signUpUser({
+        Email: email,
+        Password: password,
+        FirstName: firstName,
+        LastName: lastName,
+      });
+      // Clear input fields on successful signup
+      setEmail('');
+      setPassword('');
+      setFirstName('');
+      setLastName('');
     } catch (error) {
       console.log(error);
     }
