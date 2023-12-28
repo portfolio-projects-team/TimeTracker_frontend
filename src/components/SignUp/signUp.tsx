@@ -59,24 +59,32 @@ export const SignUp = () => {
                 type="text"
                 placeholder="First Name"
                 onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+                required // Make the field required
               />
               <FormLabel>Last Name</FormLabel>
               <Input
                 type="text"
                 placeholder="Last Name"
                 onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+                required // Make the field required
               />
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required // Make the field required
               />
               <FormLabel>Password</FormLabel>
               <Input
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required // Make the field required
               />
             </FormControl>
           </Center>
@@ -92,21 +100,31 @@ export const SignUp = () => {
             </Button>
           </Center>
           <Center>
-            <Button marginTop={5} bg="#4285F4" colorScheme="#E0EFFE" width="30vw">
+            <Button
+              marginTop={5}
+              bg="#4285F4"
+              colorScheme="#E0EFFE"
+              width="30vw"
+            >
               Continue with Google
             </Button>
           </Center>
           <Center>
-          <Button marginTop={5} bg="#000000" colorScheme="#E0EFFE" width="30vw">
-            Continue with GitHub
-          </Button>
-        </Center>
-        <Center>
-          <Text marginTop={5}>Already have an account?</Text>
-          <Link marginTop={5}>Sign In</Link>
-        </Center>
-      </Box>
-    </Flex>
-  </Container>
+            <Button
+              marginTop={5}
+              bg="#000000"
+              colorScheme="#E0EFFE"
+              width="30vw"
+            >
+              Continue with GitHub
+            </Button>
+          </Center>
+          <Center>
+            <Text marginTop={5}>Already have an account?</Text>
+            <Link marginTop={5}>Sign In</Link>
+          </Center>
+        </Box>
+      </Flex>
+    </Container>
   );  
 };
