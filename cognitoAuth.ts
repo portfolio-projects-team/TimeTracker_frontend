@@ -23,12 +23,14 @@ export const signUpUser = async (userData: {
   ];
 
   return new Promise((resolve, reject) => {
-    userPool.signUp(Email, Password, attributeList, [], (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
+    userPool.signUp(Email, Password, attributeList, [], (err, result) => {
+  if (err) {
+    console.error('Sign-up error:', err);
+    reject(err);
+  } else {
+    console.log('Sign-up result:', result);
+    resolve();
+  }
+});
   });
-};
+}
