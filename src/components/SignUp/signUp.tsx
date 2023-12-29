@@ -14,12 +14,14 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { signUpUser } from '../../../cognitoAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
@@ -35,6 +37,7 @@ export const SignUp = () => {
       setFirstName('');
       setLastName('');
       toast.success('Account created successfully!');
+      navigate('/signin');
     } catch (error) {
       toast.error('Error signing up!');
       console.log(error);
