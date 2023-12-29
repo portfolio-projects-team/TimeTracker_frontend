@@ -105,7 +105,7 @@ export const SignIn = () => {
           </Center>
           <Center>
             <Text marginTop={5}>I Don't  have an account?</Text>
-            <Link marginTop={5}>Sign Up</Link>
+            <Link marginTop={5} href="/signup" >Sign Up</Link>
           </Center>
         </Box>
       </Flex>

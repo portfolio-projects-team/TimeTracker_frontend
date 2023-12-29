@@ -127,7 +127,9 @@ export const SignUp = () => {
           </Center>
           <Center>
             <Text marginTop={5}>Already have an account?</Text>
-            <Link marginTop={5}>Sign In</Link>
+            <Link marginTop={5} href="/signin">
+              Sign In
+            </Link>
           </Center>
         </Box>
       </Flex>
