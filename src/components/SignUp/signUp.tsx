@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Box,
   Container,
@@ -33,7 +35,9 @@ export const SignUp = () => {
       setPassword('');
       setFirstName('');
       setLastName('');
+      toast.success('Account created successfully!');
     } catch (error) {
+      toast.error('Error signing up!');
       console.log(error);
     }
   };
