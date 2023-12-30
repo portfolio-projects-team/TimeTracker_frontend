@@ -7,7 +7,12 @@ const Logo: FC<LogoProps> = (props: LogoProps) => {
   return (
     <Box {...props}>
       <Text fontSize="lg" fontWeight="bold">
-        Logo
+        <Text as="span" color="black">
+          TIK
+        </Text>{' '}
+        <Text as="span" color="#7E30E1">
+          TOPIA
+        </Text>
       </Text>
     </Box>
   );
