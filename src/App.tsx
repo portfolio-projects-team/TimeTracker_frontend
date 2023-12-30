@@ -1,7 +1,6 @@
 import { Center, ChakraProvider, Container} from "@chakra-ui/react";
 import { apptheme } from "./theme";
-import TaskTable from "./TaskTable";
-import { signUp } from "./components/SignUp/signUp";
+import NavBar from "./components/Navbar/navbar";
 
 
 function App() {
@@ -9,7 +8,7 @@ function App() {
     <ChakraProvider theme={apptheme}>
       <Container>
         <Center>
-          {signUp()}
+          <NavBar />
         </Center>
       </Container>
     </ChakraProvider>
