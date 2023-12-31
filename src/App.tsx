@@ -1,7 +1,7 @@
 import { ChakraProvider, Flex, Box } from '@chakra-ui/react';
 import { apptheme } from './theme';
 import NavBar from './components/Navbar/navbar';
-import { Footer } from './components/Footer/footer';
+import Footer  from './components/Footer/footer';
 
 function App() {
   return (
