@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
             borderRightWidth="1px"
             w="60"
         >
-            <VStack h="full" w="full" alignItems="flex-start" justifyContent="center">
+            <VStack h="full" w="full" alignItems="flex-start" justifyContent="flex-start" p={4}>
                 <Link href="#" display="flex" alignItems="center">
                     <Icon as={AiOutlineHome} boxSize={6} />
                     <Text ml={3}>Dashboard</Text>
