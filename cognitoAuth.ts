@@ -3,11 +3,12 @@ import {
   CognitoUser,
   AuthenticationDetails,
   CognitoUserAttribute,
-} from 'amazon-cognito-identity-js';
-import axios from 'axios';
+  CognitoUserSession,
+} from "amazon-cognito-identity-js";
+import axios from "axios";
 
-const USER_POOL_ID = 'eu-west-2_gXHC3464g';
-const CLIENT_ID = '5pg9389eldcjjrvhdiuas3evhj';
+const USER_POOL_ID = "eu-west-2_gXHC3464g";
+const CLIENT_ID = "5pg9389eldcjjrvhdiuas3evhj";
 
 export const signUpUser = async (userData: {
   Password: string;
@@ -23,18 +24,18 @@ export const signUpUser = async (userData: {
   });
 
   const attributeList = [
-    new CognitoUserAttribute({ Name: 'email', Value: Email }),
-    new CognitoUserAttribute({ Name: 'given_name', Value: FirstName }),
-    new CognitoUserAttribute({ Name: 'family_name', Value: LastName }),
+    new CognitoUserAttribute({ Name: "email", Value: Email }),
+    new CognitoUserAttribute({ Name: "given_name", Value: FirstName }),
+    new CognitoUserAttribute({ Name: "family_name", Value: LastName }),
   ];
 
   return new Promise((resolve, reject) => {
     userPool.signUp(Email, Password, attributeList, [], (err, result) => {
       if (err) {
-        console.error('Sign-up error:', err);
+        console.error("Sign-up error:", err);
         reject(err);
       } else {
-        console.log('Sign-up result:', result);
+        console.log("Sign-up result:", result);
         resolve();
       }
     });
@@ -66,11 +67,11 @@ export const signInUser = async (userData: {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (session) => {
         const idToken = session.getIdToken().getJwtToken(); // Get the ID token
-        console.log('Sign-in success:', session);
+        console.log("Sign-in success:", session);
         resolve(idToken); // Resolve with the ID token
       },
       onFailure: (err) => {
-        console.error('Sign-in error:', err);
+        console.error("Sign-in error:", err);
         reject(err);
       },
     });
@@ -79,28 +80,33 @@ export const signInUser = async (userData: {
 
 const getTasks = async () => {
   try {
-    // Sign in the user and obtain the ID token
-    const idToken = await signInUser({
-      Email: 'example@email.com',
-      Password: 'password',
+    const userPool = new CognitoUserPool({
+      UserPoolId: USER_POOL_ID,
+      ClientId: CLIENT_ID,
     });
 
-    // Make a GET request to fetch tasks using the ID token in the header
-    const response = await axios.get(
-      'https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod',
-      {
-        headers: {
-          Authorization: `Bearer ${idToken}`, // Include the ID token in the Authorization header
-        },
-      }
-    );
+    const user = userPool.getCurrentUser();
+    user?.getSession(async (e: Error, res: CognitoUserSession | null) => {
+      if (e) throw new Error(e.message);
 
-    // Process the tasks retrieved from the response
-    const tasks = response.data;
-    console.log('Tasks:', tasks);
-    return tasks;
+      const accessToken = res?.getAccessToken();
+      const IDtoken = res?.getIdToken();
+      console.log("Access Token", accessToken);
+      console.log("ID Token", IDtoken);
+
+      const URL = "https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod";
+      const response = await axios.get(`${URL}/tasks`, {
+        headers: {
+          Authorization: `Bearer ${accessToken || IDtoken}`,
+        },
+      });
+
+      const tasks = response.data;
+      console.log("Tasks:", tasks);
+      return tasks;
+    });
   } catch (error) {
-    console.error('Error fetching tasks:', error);
+    console.error("Error fetching tasks:", error);
     throw error;
   }
 };
@@ -108,9 +114,9 @@ const getTasks = async () => {
 getTasks()
   .then((tasks) => {
     // Handle the retrieved tasks here
-    console.log('Retrieved tasks:', tasks);
+    console.log("Retrieved tasks:", tasks);
   })
   .catch((error) => {
     // Handle errors if any
-    console.error('Error getting tasks:', error);
+    console.error("Error getting tasks:", error);
   });
