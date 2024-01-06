@@ -13,7 +13,7 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import { signUpUser } from '../../../cognitoAuth';
+import { signUpUser } from '../../utils/cognitoAuth';
 import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
