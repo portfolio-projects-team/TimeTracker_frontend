@@ -31,7 +31,7 @@ export const SignIn = () => {
       setEmail('');
       setPassword('');
       toast.success('Logged in successfully!');
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       toast.error('Error signing in!');
       console.log(error);

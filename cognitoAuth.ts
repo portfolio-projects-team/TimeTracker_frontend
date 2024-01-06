@@ -5,6 +5,9 @@ import {
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js';
 
+const USER_POOL_ID = 'eu-west-2_gXHC3464g';
+const CLIENT_ID = '5pg9389eldcjjrvhdiuas3evhj';
+
 export const signUpUser = async (userData: {
   Password: string;
   FirstName: string;
@@ -14,8 +17,8 @@ export const signUpUser = async (userData: {
   const { FirstName, LastName, Email, Password } = userData;
 
   const userPool = new CognitoUserPool({
-    UserPoolId: 'eu-west-2_cLq8JoGcL',
-    ClientId: 'dcul67egcvg5l4g7epd7lbos5',
+    UserPoolId: USER_POOL_ID,
+    ClientId: CLIENT_ID,
   });
 
   const attributeList = [
@@ -44,8 +47,8 @@ export const signInUser = async (userData: {
   const { Email, Password } = userData;
 
   const userPool = new CognitoUserPool({
-    UserPoolId: 'eu-west-2_cLq8JoGcL',
-    ClientId: 'dcul67egcvg5l4g7epd7lbos5',
+    UserPoolId: USER_POOL_ID,
+    ClientId: CLIENT_ID,
   });
 
   const authenticationDetails = new AuthenticationDetails({
