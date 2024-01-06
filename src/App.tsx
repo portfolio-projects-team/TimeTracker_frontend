@@ -1,24 +1,21 @@
-import { ChakraProvider, Flex, Box } from '@chakra-ui/react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Center, ChakraProvider, Container } from '@chakra-ui/react';
 import { apptheme } from './theme';
-import NavBar from './components/Navbar/navbar';
-import Footer  from './components/Footer/footer';
+import { SignUp } from './components/SignUp/signUp'; // Replace with your other component import
 
 function App() {
   return (
     <ChakraProvider theme={apptheme}>
-      <Flex
-        minHeight="100vh"
-        flexDirection="column"
-        justifyContent="space-between"
-      >
-        <Box>
-          <NavBar />
-        </Box>
-        <Box flex="1">{/* Your main content goes here */}</Box>
-        <Box>
-          <Footer />
-        </Box>
-      </Flex>
+      <Container>
+        <Center>
+          <Router>
+            <Routes>
+              <Route path="/" />
+              <Route path="/signup" element={<SignUp />} />
+            </Routes>
+          </Router>
+        </Center>
+      </Container>
     </ChakraProvider>
   );
 }
