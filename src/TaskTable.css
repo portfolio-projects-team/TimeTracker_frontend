@@ -1,0 +1,14 @@
+
+
+.task-table {
+    width: 30%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.task-table th,
+.task-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
