@@ -10,7 +10,6 @@ import {
 import { AiOutlineHome } from 'react-icons/ai';
 import { BsFolder2 } from 'react-icons/bs';
 import { getTasks } from '../../utils/cognitoAuth';
-import TaskForm from '../TaskForm/TaskForm';
 
 const Sidebar: React.FC = () => {
   useEffect(() => {
@@ -38,7 +37,6 @@ const Sidebar: React.FC = () => {
       borderRightWidth="1px"
       w="60"
     >
-      <TaskForm />
       <VStack
         h="full"
         w="full"

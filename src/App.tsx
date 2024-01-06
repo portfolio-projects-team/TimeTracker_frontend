@@ -7,6 +7,7 @@ import { SignUp } from './components/SignUp/signUp'; // Replace with your other 
 import { SignIn } from './components/SignIn/signIn'; // Replace with your other component import
 import Dashboard from './components/Dashboard/Dashboard';
 
+
 function App() {
   return (
     <ChakraProvider theme={apptheme}>
