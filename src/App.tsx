@@ -1,11 +1,11 @@
-import { ChakraProvider, Flex, Box } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { apptheme } from './theme';
-import NavBar from './components/Navbar/navbar';
-import Footer from './components/Footer/footer';
-import { SignUp } from './components/SignUp/signUp'; // Replace with your other component import
-import { SignIn } from './components/SignIn/signIn'; // Replace with your other component import
-import Dashboard from './components/Dashboard/Dashboard';
+import { ChakraProvider, Flex, Box } from "@chakra-ui/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { apptheme } from "./theme";
+import NavBar from "./components/Navbar/navbar";
+import Footer from "./components/Footer/footer";
+import { SignUp } from "./components/SignUp/signUp"; // Replace with your other component import
+import { SignIn } from "./components/SignIn/signIn"; // Replace with your other component import
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
