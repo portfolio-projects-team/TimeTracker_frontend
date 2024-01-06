@@ -1,5 +1,6 @@
 import { Center, ChakraProvider, Container, Heading } from "@chakra-ui/react";
 import { apptheme } from "./theme";
+import TaskForm from "./TaskForm"
 
 function App() {
   return (
@@ -7,7 +8,9 @@ function App() {
       <ChakraProvider theme={apptheme}>
         <Container>
           <Center h="100vh">
-            <Heading>App coming soon!</Heading>
+            {/* <Heading>App coming soon!</Heading> */}
+            {/* Include your TaskForm component */}
+            <TaskForm />
           </Center>
         </Container>
       </ChakraProvider>

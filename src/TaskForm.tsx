@@ -7,6 +7,7 @@ import {
     Input,
     Stack,
     Text,
+    useColorModeValue,
 } from '@chakra-ui/react';
 
 const TaskForm: React.FC = () => {
@@ -32,6 +33,16 @@ const TaskForm: React.FC = () => {
         setIsTimerRunning(!isTimerRunning);
     };
 
+    const formatTime = (seconds: number): string => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+        return `${formattedMinutes}:${formattedSeconds}`;
+    };
+
     return (
         <Box p={4} maxWidth="400px" mx="auto">
             <Stack spacing={4}>
@@ -48,23 +59,13 @@ const TaskForm: React.FC = () => {
                     <Text fontSize="lg" fontWeight="bold" mb={2}>
                         Timer: {formatTime(timer)}
                     </Text>
-                    <Button onClick={handleStartStopTimer}>
+                    <Button onClick={handleStartStopTimer} w="full" colorScheme='red'>
                         {isTimerRunning ? 'Stop' : 'Start'}
                     </Button>
                 </Box>
             </Stack>
         </Box>
     );
-};
-
-const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
-
-    return ${ formattedMinutes }:${ formattedSeconds };
 };
 
 export default TaskForm;
