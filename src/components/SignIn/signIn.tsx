@@ -13,33 +13,27 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import { signUpUser } from '../../../cognitoAuth';
+import { signInUser } from '../../../cognitoAuth';
 import { useNavigate } from 'react-router-dom';
 
-export const SignUp = () => {
+export const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
-      await signUpUser({
+      await signInUser({
         Email: email,
         Password: password,
-        FirstName: firstName,
-        LastName: lastName,
       });
       // Clear input fields on successful signup
       setEmail('');
       setPassword('');
-      setFirstName('');
-      setLastName('');
-      toast.success('Account created successfully!');
-      navigate('/signin');
+      toast.success('Logged in successfully!');
+      navigate('/');
     } catch (error) {
-      toast.error('Error signing up!');
+      toast.error('Error signing in!');
       console.log(error);
     }
   };
@@ -55,27 +49,11 @@ export const SignUp = () => {
         <Box flex="1" width="50vw" bg="#F0F0F0" padding={20}>
           <Center>
             <Text fontSize="4xl" fontWeight="bold">
-              Create an account
+              Sign In
             </Text>
           </Center>
           <Center>
             <FormControl marginTop={30} width="30vw">
-              <FormLabel>First Name</FormLabel>
-              <Input
-                type="text"
-                placeholder="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                required // Make the field required
-              />
-              <FormLabel>Last Name</FormLabel>
-              <Input
-                type="text"
-                placeholder="Last Name"
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                required // Make the field required
-              />
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
@@ -102,7 +80,7 @@ export const SignUp = () => {
               width="30vw"
               onClick={handleSignUp}
             >
-              Create Account
+              Sign In
             </Button>
           </Center>
           <Center>
@@ -126,10 +104,8 @@ export const SignUp = () => {
             </Button>
           </Center>
           <Center>
-            <Text marginTop={5}>Already have an account?</Text>
-            <Link marginTop={5} href="/signin">
-              Sign In
-            </Link>
+            <Text marginTop={5}>I Don't  have an account?</Text>
+            <Link marginTop={5} href="/signup" >Sign Up</Link>
           </Center>
         </Box>
       </Flex>
