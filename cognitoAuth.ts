@@ -4,11 +4,11 @@ import {
   AuthenticationDetails,
   CognitoUserAttribute,
   CognitoUserSession,
-} from 'amazon-cognito-identity-js';
-import axios from 'axios';
+} from "amazon-cognito-identity-js";
+import axios from "axios";
 
-const USER_POOL_ID = 'eu-west-2_gXHC3464g';
-const CLIENT_ID = '5pg9389eldcjjrvhdiuas3evhj';
+const USER_POOL_ID = "eu-west-2_gXHC3464g";
+const CLIENT_ID = "5pg9389eldcjjrvhdiuas3evhj";
 
 export const signUpUser = async (userData: {
   Password: string;
@@ -24,18 +24,18 @@ export const signUpUser = async (userData: {
   });
 
   const attributeList = [
-    new CognitoUserAttribute({ Name: 'email', Value: Email }),
-    new CognitoUserAttribute({ Name: 'given_name', Value: FirstName }),
-    new CognitoUserAttribute({ Name: 'family_name', Value: LastName }),
+    new CognitoUserAttribute({ Name: "email", Value: Email }),
+    new CognitoUserAttribute({ Name: "given_name", Value: FirstName }),
+    new CognitoUserAttribute({ Name: "family_name", Value: LastName }),
   ];
 
   return new Promise((resolve, reject) => {
     userPool.signUp(Email, Password, attributeList, [], (err, result) => {
       if (err) {
-        console.error('Sign-up error:', err);
+        console.error("Sign-up error:", err);
         reject(err);
       } else {
-        console.log('Sign-up result:', result);
+        console.log("Sign-up result:", result);
         resolve();
       }
     });
@@ -67,11 +67,11 @@ export const signInUser = async (userData: {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (session) => {
         const idToken = session.getIdToken().getJwtToken(); // Get the ID token
-        console.log('Sign-in success:', session);
+        console.log("Sign-in success:", session);
         resolve(idToken); // Resolve with the ID token
       },
       onFailure: (err) => {
-        console.error('Sign-in error:', err);
+        console.error("Sign-in error:", err);
         reject(err);
       },
     });
@@ -89,24 +89,24 @@ export const getTasks = async () => {
     user?.getSession(async (e: Error, res: CognitoUserSession | null) => {
       if (e) throw new Error(e.message);
 
-      const accessToken = res?.getAccessToken();
-      const IDtoken = res?.getIdToken();
-      console.log('Access Token', accessToken);
-      console.log('ID Token', IDtoken);
+      const accessToken = res?.getAccessToken().getJwtToken();
+      const IDtoken = res?.getIdToken().getJwtToken();
+      console.log("Access Token", accessToken);
+      console.log("ID Token", IDtoken);
 
-      const URL = 'https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod';
-      const response = await axios.get(`${URL}/tasks`, {
+      const URL = "https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod";
+      const response = await axios.get(`${URL}/task`, {
         headers: {
-          Authorization: `Bearer ${accessToken || IDtoken}`,
+          Authorization: `Bearer ${IDtoken}`,
         },
       });
 
       const tasks = response.data;
-      console.log('Tasks:', tasks);
+      console.log("Tasks:", tasks);
       return tasks;
     });
   } catch (error) {
-    console.error('Error fetching tasks:', error);
+    console.error("Error fetching tasks:", error);
     throw error;
   }
 };
