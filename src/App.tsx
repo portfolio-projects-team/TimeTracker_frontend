@@ -21,7 +21,7 @@ function App() {
         <Box flex="1">
           <Router>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/dashboard" element={<Dashboard />} />
