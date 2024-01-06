@@ -1,17 +1,24 @@
-import { Center, ChakraProvider, Container} from "@chakra-ui/react";
-import { apptheme } from "./theme";
-import TaskTable from "./TaskTable";
-import { signUp } from "./components/SignUp/signUp";
-
+import { ChakraProvider, Flex, Box } from '@chakra-ui/react';
+import { apptheme } from './theme';
+import NavBar from './components/Navbar/navbar';
+import Footer  from './components/Footer/footer';
 
 function App() {
   return (
     <ChakraProvider theme={apptheme}>
-      <Container>
-        <Center>
-          {signUp()}
-        </Center>
-      </Container>
+      <Flex
+        minHeight="100vh"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
+        <Box>
+          <NavBar />
+        </Box>
+        <Box flex="1">{/* Your main content goes here */}</Box>
+        <Box>
+          <Footer />
+        </Box>
+      </Flex>
     </ChakraProvider>
   );
 }
