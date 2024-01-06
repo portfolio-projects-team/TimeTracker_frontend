@@ -1,4 +1,5 @@
-import { Center, ChakraProvider, Container, Heading } from "@chakra-ui/react";
+
+import { Center, ChakraProvider, Container } from "@chakra-ui/react";
 import { apptheme } from "./theme";
 import TaskForm from "./TaskForm"
 
@@ -19,3 +20,4 @@ function App() {
 }
 
 export default App;
+
