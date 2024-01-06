@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Box,
     Icon,
@@ -9,9 +9,20 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineHome } from 'react-icons/ai';
 import { BsFolder2 } from 'react-icons/bs';
+import { getTasks } from '../../../cognitoAuth';
 
 const Sidebar: React.FC = () => {
-    return (
+
+    useEffect(() => {
+        getTasks().then(tasks => {
+            console.log(tasks)
+        }).catch(e => {
+            console.log(e)
+        })
+
+    })
+
+    return   (
         <Box
             as="nav"
             pos="fixed"
