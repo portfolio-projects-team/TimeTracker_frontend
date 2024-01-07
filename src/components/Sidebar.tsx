@@ -9,9 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsFolder2 } from "react-icons/bs";
-
-import TaskForm from "../../TaskForm";
-import { getTasks } from "../../api";
+import { getTasks } from "../api";
 
 const Sidebar: React.FC = () => {
   useEffect(() => {
@@ -19,7 +17,7 @@ const Sidebar: React.FC = () => {
       .then((tasks) => {
         console.log(tasks);
       })
-      .catch((e) => {
+      .catch((e: unknown) => {
         console.log(e);
       });
   });
@@ -39,7 +37,6 @@ const Sidebar: React.FC = () => {
       borderRightWidth="1px"
       w="60"
     >
-      <TaskForm />
       <VStack
         h="full"
         w="full"
