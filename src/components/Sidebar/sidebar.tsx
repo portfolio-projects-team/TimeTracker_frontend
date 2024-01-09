@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineHome } from 'react-icons/ai';
 import { BsFolder2 } from 'react-icons/bs';
-import { getTasks } from '../../utils/cognitoAuth';
+import { getTasks } from '../../api';
 
 const Sidebar: React.FC = () => {
   useEffect(() => {
