@@ -13,7 +13,7 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import { signInUser } from '../../../cognitoAuth';
+import { signInUser } from '../../utils/cognitoAuth';
 import { useNavigate } from 'react-router-dom';
 
 export const SignIn = () => {
@@ -104,8 +104,10 @@ export const SignIn = () => {
             </Button>
           </Center>
           <Center>
-            <Text marginTop={5}>I Don't  have an account?</Text>
-            <Link marginTop={5} href="/signup" >Sign Up</Link>
+            <Text marginTop={5}>I Don't have an account?</Text>
+            <Link marginTop={5} href="/signup">
+              Sign Up
+            </Link>
           </Center>
         </Box>
       </Flex>

@@ -13,7 +13,7 @@ import {
   Button,
   Link,
 } from '@chakra-ui/react';
-import { signUpUser } from '../../../cognitoAuth';
+import { signUpUser } from '../../utils/cognitoAuth';
 import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
@@ -52,14 +52,14 @@ export const SignUp = () => {
             <Text>Box 3</Text>
           </Center>
         </Box>
-        <Box flex="1" width="50vw" bg="#F0F0F0" padding={20}>
+        <Box flex="1" width="50vw"overflow="hidden" bg="#F0F0F0" padding={10}>
           <Center>
             <Text fontSize="4xl" fontWeight="bold">
               Create an account
             </Text>
           </Center>
           <Center>
-            <FormControl marginTop={30} width="30vw">
+            <FormControl marginTop={10} width="30vw">
               <FormLabel>First Name</FormLabel>
               <Input
                 type="text"
