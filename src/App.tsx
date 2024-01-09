@@ -6,7 +6,6 @@ import Footer from "./components/Footer/footer";
 import { SignUp } from "./components/SignUp/signUp"; // Replace with your other component import
 import { SignIn } from "./components/SignIn/signIn"; // Replace with your other component import
 import Dashboard from "./components/Dashboard/Dashboard";
-import TaskTable from "./components/TaskTable/TaskTable";
 
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/taskTable" element={<TaskTable />} />
             </Routes>
           </Router>
         </Box>
