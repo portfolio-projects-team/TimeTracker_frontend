@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { getTasks } from "../../../cognitoAuth";
+
 import {
   Input,
   Table,
@@ -10,6 +11,7 @@ import {
   Td,
   Flex,
   Box,
+  Center,
 } from "@chakra-ui/react";
 
 interface Task {
@@ -18,36 +20,31 @@ interface Task {
 }
 
 interface TaskTableProps {
-  data: Task[];
+  // data: Task[];
 }
 
 const TaskTable: React.FC<TaskTableProps> = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [data, setData] = useState<Task[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod/task"
-        ); 
-        setData(response.data.tasks);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+ useEffect(() => {
+  const tasks = getTasks().then(res => res.tasks);
+});
 
-    fetchData();
-  }, []); 
-
-  const filteredData = data.filter((task) =>
+  const filteredData =data.filter((task) =>
     task.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const bgHeader = "blue.100";
 
   return (
-    <Flex direction="column" alignItems="center" justifyContent="center" p={10}>
+    <Flex
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      p={2}
+      mt={130}
+    >
       <Input
         type="text"
         placeholder="Search by Task Name"
@@ -55,16 +52,23 @@ const TaskTable: React.FC<TaskTableProps> = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         mb={4}
         w="full"
+        ml={50}
+        mr={50}
       />
 
-      <Box w="full" overflowX="auto">
+      <Box w="full" overflowX="auto" mt={30}>
         <Table variant="simple" size="md" borderWidth="1px" borderRadius="lg">
           <Thead bg={bgHeader} borderTopWidth="2px">
             <Tr>
-              <Th borderWidth="1px" borderColor="gray" p={10}>
+              <Th borderWidth="1px" borderColor="gray" p={2} textAlign="center">
                 Task ID
               </Th>
-              <Th borderWidth="1px" borderColor="gray.200" p={10}>
+              <Th
+                borderWidth="1px"
+                borderColor="gray.200"
+                p={2}
+                textAlign="center"
+              >
                 Task Name
               </Th>
             </Tr>
