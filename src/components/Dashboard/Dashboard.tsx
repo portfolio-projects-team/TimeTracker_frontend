@@ -2,10 +2,10 @@ import Sidebar from "../Sidebar/sidebar";
 import TaskForm from "../TaskForm/TaskForm";
 
 const Dashboard = () => {
-    return (
+  return (
     <div className="flex">
       <Sidebar />
-        <TaskForm />    
+      <TaskForm />
     </div>
   );
 };
