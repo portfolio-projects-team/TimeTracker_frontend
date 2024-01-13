@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
         </Link>
         <Link href="#" display="flex" alignItems="center">
           <Icon as={BsFolder2} boxSize={6} />
-          <Text ml={3}>Projects</Text>
+          <Text ml={3}>Tasks</Text>
         </Link>
       </VStack>
     </Box>
