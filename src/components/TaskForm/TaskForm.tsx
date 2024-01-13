@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { createTask } from "../../api";
 
 const TaskForm: React.FC = () => {
   const [taskName, setTaskName] = useState("");
@@ -30,6 +31,7 @@ const TaskForm: React.FC = () => {
 
   const handleStartStopTimer = () => {
     setIsTimerRunning(!isTimerRunning);
+    createTask({ taskName: taskName });
   };
 
   const formatTime = (seconds: number): string => {

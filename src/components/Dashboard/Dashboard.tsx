@@ -1,12 +1,13 @@
+import { Box } from "@chakra-ui/react";
 import Sidebar from "../Sidebar/sidebar";
 import TaskForm from "../TaskForm/TaskForm";
 
 const Dashboard = () => {
   return (
-    <div className="flex">
-      <Sidebar />
+    <Box my={12}>
       <TaskForm />
-    </div>
+      <Sidebar />
+    </Box>
   );
 };
 
