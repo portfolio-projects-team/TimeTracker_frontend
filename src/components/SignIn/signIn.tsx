@@ -41,11 +41,6 @@ export const SignIn = () => {
   return (
     <Container maxW="xl" centerContent>
       <Flex marginTop={40}>
-        <Box flex="1" width="50vw" bg="#050A24">
-          <Center>
-            <Text>Box 3</Text>
-          </Center>
-        </Box>
         <Box flex="1" width="50vw" bg="#F0F0F0" padding={20}>
           <Center>
             <Text fontSize="4xl" fontWeight="bold">
