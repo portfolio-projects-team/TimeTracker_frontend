@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import Sidebar from "../Sidebar/sidebar";
+import Sidebar from "../Sidebar/Index";
 import TaskForm from "../TaskForm/TaskForm";
 
 const Dashboard = () => {

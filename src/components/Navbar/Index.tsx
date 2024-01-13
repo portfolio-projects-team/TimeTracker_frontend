@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Link,
-  Box,
-  Flex,
-  Text,
-  Button,
-  Stack,
-  HTMLChakraProps,
-} from '@chakra-ui/react';
+import { Link, Box, Text, Button, Stack } from '@chakra-ui/react';
 
+import { NavBarContainer } from './NavContainer';
 import Logo from '../Logo/logo';
 
 interface MenuItemProps {
@@ -62,9 +55,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, to = '/' }) => {
 
 interface MenuLinksProps {
   isOpen: boolean;
+  isGuest: boolean;
 }
 
-const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen }) => {
+const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, isGuest }) => {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -77,57 +71,36 @@ const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/">Home</MenuItem>
-        <MenuItem to="/dashboard">Dashboard</MenuItem>
-        <MenuItem to="/signin">Sign In</MenuItem>
-        <MenuItem to="/signup" isLast>
-          <Button>Create Account</Button>
-        </MenuItem>
+        {isGuest && (
+          <>
+            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/dashboard">Dashboard</MenuItem>
+            <MenuItem to="/signin">Sign In</MenuItem>
+            <MenuItem to="/signup" isLast>
+              <Button>Create Account</Button>
+            </MenuItem>
+          </>
+        )}
+
+        {!isGuest && <MenuItem to="/logout">Logout</MenuItem>}
       </Stack>
     </Box>
   );
 };
 
-interface NavBarContainerProps extends HTMLChakraProps<'nav'> {}
-
-const NavBarContainer: React.FC<NavBarContainerProps> = ({
-  children,
-  ...props
-}) => {
-  return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      w="100%"
-      mb={8}
-      p={8}
-      zIndex={20}
-      pos="fixed"
-      top="0"
-      left="0"
-      overflow="auto"
-      {...props}
-    >
-      {children}
-    </Flex>
-  );
-};
-
-const NavBar: React.FC = (props) => {
+const NavBar: React.FC<{ isGuest: boolean }> = ({ isGuest }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer>
       <Logo
         w="100px"
         color={['white', 'white', 'primary.500', 'primary.500']}
       />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} isGuest={isGuest} />
     </NavBarContainer>
   );
 };
