@@ -1,9 +1,7 @@
 import axios from "axios";
 import { getIdentityToken } from "./utils/cognitoAuth";
 
-const BASE_URL =
-  import.meta.env.BASE_URL ||
-  "https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod";
+const BASE_URL = "https://9mdink4tu2.execute-api.eu-west-2.amazonaws.com/Prod";
 
 export const getAxios = async () => {
   const IDToken = await getIdentityToken();
@@ -32,7 +30,7 @@ export const getTasks = async () => {
 export const createTask = async (task: Task) => {
   try {
     const axios = await getAxios();
-    await axios.post("/task", task);
+    await axios.post("/tasks", task);
     return;
   } catch (error) {
     console.error("Error fetching tasks:", error);

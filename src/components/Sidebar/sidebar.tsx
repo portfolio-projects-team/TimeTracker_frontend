@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Box,
   Icon,
@@ -6,10 +6,10 @@ import {
   Text,
   VStack,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { AiOutlineHome } from 'react-icons/ai';
-import { BsFolder2 } from 'react-icons/bs';
-import { getTasks } from '../../api';
+} from "@chakra-ui/react";
+import { AiOutlineHome } from "react-icons/ai";
+import { BsFolder2 } from "react-icons/bs";
+import { getTasks } from "../../api";
 
 const Sidebar: React.FC = () => {
   useEffect(() => {
@@ -32,8 +32,8 @@ const Sidebar: React.FC = () => {
       h="full"
       overflowX="hidden"
       overflowY="auto"
-      bg={useColorModeValue('white', 'gray.800')}
-      borderColor={useColorModeValue('inherit', 'gray.700')}
+      bg={useColorModeValue("white", "gray.800")}
+      borderColor={useColorModeValue("inherit", "gray.700")}
       borderRightWidth="1px"
       w="60"
     >
