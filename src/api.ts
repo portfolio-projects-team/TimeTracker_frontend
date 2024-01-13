@@ -12,7 +12,8 @@ export const getAxios = async () => {
   return _axios;
 };
 
-type Task = {
+export type Task = {
+  startTime: string;
   taskName: string;
 };
 

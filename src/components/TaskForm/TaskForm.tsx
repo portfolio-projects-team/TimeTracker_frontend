@@ -60,7 +60,7 @@ const TaskForm: React.FC = () => {
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             Timer: {formatTime(timer)}
           </Text>
-          <Button onClick={handleStartStopTimer} w="full" colorScheme="red">
+          <Button onClick={handleStartStopTimer} w="full" colorScheme="green">
             {isTimerRunning ? "Stop" : "Start"}
           </Button>
         </Box>
