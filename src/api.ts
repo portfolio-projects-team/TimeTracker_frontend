@@ -28,7 +28,7 @@ export const getTasks = async () => {
   }
 };
 
-export const createTask = async (task: Task) => {
+export const createTask = async (task: Pick<Task, "taskName">) => {
   try {
     const axios = await getAxios();
     await axios.post("/tasks", task);
