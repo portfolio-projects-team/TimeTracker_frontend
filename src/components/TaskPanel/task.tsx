@@ -1,46 +1,36 @@
-/* eslint-disable prefer-const */
 import React, { useState, useEffect } from "react";
 import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { Duration, intervalToDuration } from "date-fns";
-
 import { Task } from "../../api";
 
 const TaskPanel: React.FC<{ task: Task }> = ({ task }) => {
   const [duration, setDuration] = useState<Duration | undefined>(undefined);
 
- useEffect(() => {
-    const updateDuration = () => {
-      if (task.startTime) {
-        setDuration(intervalToDuration({
-          start: Number(task.startTime) * 1000, 
-          end: new Date(), 
-        }));
-      }
-    };
+  useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval>;
 
-    updateDuration();
-    let intervalId = setInterval(updateDuration, 1000);
+    if (task.startTime) {
+      intervalId = setInterval(() => {
+        const duration = intervalToDuration({
+          start: Number(task.startTime * 1000).getTime(),
+          end: Date.now(),
+        });
 
-    return () => clearInterval(intervalId);
+        setDuration(duration);
+      }, 1000);
+
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
   }, [task]);
 
-  
+  // Helper function to format the duration parts
+  const formatDurationPart = (part?: number): string => {
+    // Ensure that `part` is a number (defaulting to 0), and pad with leading zeros if necessary
+    return String(part ?? 0).padStart(2, '0');
+  };
 
-  const zeroPad = (num: number, places: number) =>
-    String(num).padStart(places, "0");
-
-    const displayDuration = duration
-      ? {
-          hours: zeroPad(duration.hours?? 2,0),
-          minutes: zeroPad(duration.minutes?? 2,0),
-          seconds: zeroPad(duration.seconds?? 2,0),
-        }
-      : {
-          hours: "00",
-          minutes: "00",
-          seconds: "00",
-        };
-  
   const handleStartStopTimer = () => {
     // setIsTimerRunning(!isTimerRunning);
   };
@@ -55,8 +45,7 @@ const TaskPanel: React.FC<{ task: Task }> = ({ task }) => {
         <Box>
           {duration && (
             <Text fontSize="lg" fontWeight="bold" mb={2}>
-              Timer: {displayDuration.hours}hr: {displayDuration.minutes}m:{" "}
-              {displayDuration.seconds}s
+              {`Timer: ${formatDurationPart(duration.hours)}hr: ${formatDurationPart(duration.minutes)}m: ${formatDurationPart(duration.seconds)}s`}
             </Text>
           )}
           <Button onClick={handleStartStopTimer} w="full" colorScheme="red">
@@ -69,5 +58,3 @@ const TaskPanel: React.FC<{ task: Task }> = ({ task }) => {
 };
 
 export default TaskPanel;
-
-
