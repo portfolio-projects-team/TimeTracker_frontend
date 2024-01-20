@@ -1,5 +1,5 @@
 import { ChakraProvider, Flex, Box } from '@chakra-ui/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { apptheme } from './theme';
 import NavBar from './components/Navbar/Index';
 import Footer from './components/Footer/footer';
@@ -8,6 +8,7 @@ import { SignIn } from './components/SignIn/signIn'; // Replace with your other 
 import Dashboard from './components/Dashboard/Dashboard';
 import Landing from './components/Landing/Index';
 import React from 'react';
+import { CognitoIdToken } from 'amazon-cognito-identity-js';
 
 const GuestLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -20,10 +21,27 @@ const GuestLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [auth, setAuth] = React.useState(false);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const idToken = localStorage.getItem('idToken');
+    if (idToken) {
+      const token = new CognitoIdToken({ IdToken: idToken });
+      if (token) {
+        setAuth(true);
+      } else {
+        navigate('/signin');
+      }
+    } else {
+      navigate('/signin');
+    }
+  }
+  , []);
   return (
     <>
       <NavBar isGuest={false} />
-      {children}
+      {auth && children}
     </>
   );
 };
