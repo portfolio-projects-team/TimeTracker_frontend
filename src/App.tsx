@@ -6,6 +6,7 @@ import Footer from './components/Footer/footer';
 import { SignUp } from './components/SignUp/signUp'; // Replace with your other component import
 import { SignIn } from './components/SignIn/signIn'; // Replace with your other component import
 import Dashboard from './components/Dashboard/Dashboard';
+import Landing from './components/Landing/Index';
 import React from 'react';
 
 const GuestLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -38,7 +39,12 @@ function App() {
         <Box flex="1">
           <Router>
             <Routes>
-              <Route path="/" />
+              <Route path="/" 
+              element={
+              <GuestLayout>
+                <Landing />
+                </GuestLayout>}
+                />
               <Route
                 path="/signup"
                 element={
