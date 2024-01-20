@@ -6,8 +6,8 @@ import {
   CognitoUserSession,
 } from "amazon-cognito-identity-js";
 
-const USER_POOL_ID = "eu-west-2_gXHC3464g";
-const CLIENT_ID = "5pg9389eldcjjrvhdiuas3evhj";
+export const USER_POOL_ID = "eu-west-2_gXHC3464g";
+export const CLIENT_ID = "5pg9389eldcjjrvhdiuas3evhj";
 
 export const signUpUser = async (userData: {
   Password: string;
