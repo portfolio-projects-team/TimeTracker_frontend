@@ -39,12 +39,14 @@ function App() {
         <Box flex="1">
           <Router>
             <Routes>
-              <Route path="/" 
-              element={
-              <GuestLayout>
-                <Landing />
-                </GuestLayout>}
-                />
+              <Route
+                path="/"
+                element={
+                  <GuestLayout>
+                    <Landing />
+                  </GuestLayout>
+                }
+              />
               <Route
                 path="/signup"
                 element={

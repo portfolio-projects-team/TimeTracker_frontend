@@ -1,8 +1,10 @@
+import { Box } from '@chakra-ui/react';
+
 const Landing = () => {
   return (
-    <div>
-        
-    </div>
+    <Box h="100px">
+      
+    </Box>
   );
 };
 
