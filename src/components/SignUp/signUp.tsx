@@ -101,26 +101,6 @@ export const SignUp = () => {
             </Button>
           </Center>
           <Center>
-            <Button
-              marginTop={5}
-              bg="#4285F4"
-              colorScheme="#E0EFFE"
-              width="30vw"
-            >
-              Continue with Google
-            </Button>
-          </Center>
-          <Center>
-            <Button
-              marginTop={5}
-              bg="#000000"
-              colorScheme="#E0EFFE"
-              width="30vw"
-            >
-              Continue with GitHub
-            </Button>
-          </Center>
-          <Center>
             <Text marginTop={5}>Already have an account?</Text>
             <Link marginTop={5} href="/signin">
               Sign In
