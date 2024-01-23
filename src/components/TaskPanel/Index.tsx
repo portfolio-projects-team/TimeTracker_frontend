@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import { Duration, intervalToDuration } from "date-fns";
 import { Task } from "../../api";
@@ -9,26 +9,38 @@ const TaskPanel: React.FC<{ task: Task }> = ({ task }) => {
   const [timerRunning, setTimerRunning] = useState(true); 
 const [intervalId, setIntervalId] = useState<number| undefined>(undefined);
 
-  useEffect(() => {
-    if (!timerRunning) {
-      return;
-    }
 
-    const updateDuration = () => {
-      if (task.startTime) {
-        setDuration(intervalToDuration({
-          start: Number(task.startTime) * 1000, 
-          end: new Date(), 
-        }));
+  const updateDuration = useCallback(() => {
+    if (task.startTime) {
+      const newDuration = intervalToDuration({
+        start: Number(task.startTime) * 1000,
+        end: new Date(),
+      });
+      setDuration(newDuration);
+    }
+  }, [task]);
+
+  useEffect(() => {
+    if (timerRunning) {
+      updateDuration(); 
+      const id = window.setInterval(updateDuration, 1000);
+      setIntervalId(id); 
+      return () => {
+        clearInterval(id); 
+      };
+    }
+    if (!timerRunning && intervalId !== undefined) {
+      clearInterval(intervalId);
+      setIntervalId(undefined); 
+    }
+    
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
       }
     };
+  }, [timerRunning, updateDuration, intervalId]);
 
-    updateDuration(); 
-    const id = setInterval(updateDuration, 1000);
-    setIntervalId(id); 
-
-    return () => clearInterval(id);
-  }, [task, timerRunning]);
 
   const zeroPad = (num: number, places: number) =>
     String(num).padStart(places, "0");
@@ -45,24 +57,9 @@ const [intervalId, setIntervalId] = useState<number| undefined>(undefined);
         seconds: "00",
       };
 
-  const handleStartStopTimer = () => {
-    if ( timerRunning) {
-      clearInterval(intervalId);
-      setIntervalId(undefined);
-    } else if (!timerRunning) {
-      const id = setInterval(() => {
-        if (task.startTime) {
-          setDuration(intervalToDuration({
-            start: Number(task.startTime) * 1000, 
-            end: new Date(), 
-          }));
-        }
-      }, 1000);
-      setIntervalId(id);
-    }
-    
-    setTimerRunning(!timerRunning);
-  };
+   const handleStartStopTimer = () => {
+     setTimerRunning((prevState) => !prevState); 
+   };
   
   return (
     <Box p={4} maxWidth="400px" mx="auto">
